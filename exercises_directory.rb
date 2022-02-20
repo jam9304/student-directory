@@ -5,16 +5,16 @@ def input_students
   puts "To finish, just hit return twice"
   #create an empty array
   students = []
-  name = gets.strip
+  name = STDIN.gets.strip
   cohort_check = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "N/A", ""]
   
   #while the name is not empty, repeat this code
   while !name.empty? do
     puts "And what cohort are they in?"
-    cohort_entry = gets.strip
+    cohort_entry = STDIN.gets.strip
       while !cohort_check.include?(cohort_entry)
         puts "Please re enter the cohort or state 'N/A'"
-        cohort_entry = gets.strip
+        cohort_entry = STDIN.gets.strip
       end
       if cohort_entry.empty?
         cohort = "N/A"
@@ -22,14 +22,14 @@ def input_students
       end
   
     puts "And what's their favourite Hobby?"
-    hobby = gets.strip
+    hobby = STDIN.gets.strip
     puts "And finally, what country were they born in?"
-    country = gets.strip
+    country = STDIN.gets.strip
     #  add the student hash to the array
     @students << {name: name, cohort: cohort, hobby: hobby, origin_country: country}
     #get another name from the user
     puts "Thank you, now the next student please."
-    name = gets.strip
+    name = STDIN.gets.strip
   end
   #return array of students
   students
@@ -97,7 +97,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -113,8 +113,8 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort, country, hobby = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym, origin_country: country, hobby: hobby}
@@ -122,4 +122,17 @@ def load_students
   file.close
 end
 
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist."
+    exit
+  end
+end
+
+try_load_students
 interactive_menu
