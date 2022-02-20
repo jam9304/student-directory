@@ -6,9 +6,14 @@ def input_students
   name = gets.chomp
   #while the name is not empty, repeat this code
   while !name.empty? do
+    puts "And what's their favourite Hobby?"
+    hobby = gets.chomp
+    puts "And finally, what country were they born in?"
+    country = gets.chomp
     #  add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, hobby: hobby, origin_country: country}
     #get another name from the user
+    puts "Thank you, now the next student please."
     name = gets.chomp
   end
   #return array of students
@@ -22,10 +27,8 @@ def print_header
 end
 
 def print(students)
-  index = 0
-  while index < students.length do
-    puts "#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"  
-    index += 1
+    students.each_with_index do |student, number|  
+    puts "#{number + 1}. #{student[:name]} (#{student[:cohort]} cohort). They were born in #{student[:origin_country]} and enjoys #{student[:hobby]}" 
   end
 end
 
