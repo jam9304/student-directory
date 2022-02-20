@@ -42,18 +42,12 @@ def print_header
 end
 
 def print(students)
-  puts "What cohort would you like to see?"
-  cohort_to_view = gets.strip
-  viewable_cohort = []
-  students.map do |student|
-    if student[:cohort] == cohort_to_view
-      viewable_cohort.push(student)
-    end
-  end
-  viewable_cohort.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    students.each_with_index do |student, number|  
+    output_3 = "#{number + 1}. #{student[:name]} (#{student[:cohort]} cohort). They were born in #{student[:origin_country]} and enjoys #{student[:hobby]}" 
+    puts output_3.center(100)
   end
 end
+
 
 def print_footer(students)
   puts " "
@@ -69,5 +63,7 @@ end
 
 students = input_students
 print_header
-print(students)
-print_footer(students)
+if students.length > 0
+  print(students)
+  print_footer(students)
+end
