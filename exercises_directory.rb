@@ -22,18 +22,23 @@ end
 
 #Methods for the header, student students and footer
 def print_header
-  puts "The students of Villians Academy"
-  puts "-------------"
+  output_1 = "The Students of Villians Academy"
+  output_2 = "----------------------------------"
+  puts output_1.center(100)
+  puts output_2.center(100)
 end
 
 def print(students)
     students.each_with_index do |student, number|  
-    puts "#{number + 1}. #{student[:name]} (#{student[:cohort]} cohort). They were born in #{student[:origin_country]} and enjoys #{student[:hobby]}" 
+    output_3 = "#{number + 1}. #{student[:name]} (#{student[:cohort]} cohort). They were born in #{student[:origin_country]} and enjoys #{student[:hobby]}" 
+    puts output_3.center(100)
   end
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  puts " "
+  output_4 = "Overall, we have #{students.count} great students"
+  puts output_4.center(100)
 end
 
 
