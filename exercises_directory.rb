@@ -3,16 +3,16 @@ def input_students
   puts "To finish, just hit return twice"
   #create an empty array
   students = []
-  name = gets.chomp
+  name = gets.strip
   cohort_check = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "N/A", ""]
   
   #while the name is not empty, repeat this code
   while !name.empty? do
     puts "And what cohort are they in?"
-    cohort_entry = gets.chomp
+    cohort_entry = gets.strip
       while !cohort_check.include?(cohort_entry)
         puts "Please re enter the cohort or state 'N/A'"
-        cohort_entry = gets.chomp
+        cohort_entry = gets.strip
       end
       if cohort_entry.empty?
         cohort = "N/A"
@@ -20,14 +20,14 @@ def input_students
       end
   
     puts "And what's their favourite Hobby?"
-    hobby = gets.chomp
+    hobby = gets.strip
     puts "And finally, what country were they born in?"
-    country = gets.chomp
+    country = gets.strip
     #  add the student hash to the array
     students << {name: name, cohort: cohort, hobby: hobby, origin_country: country}
     #get another name from the user
     puts "Thank you, now the next student please."
-    name = gets.chomp
+    name = gets.strip
   end
   #return array of students
   students
@@ -43,7 +43,7 @@ end
 
 def print(students)
   puts "What cohort would you like to see?"
-  cohort_to_view = gets.chomp
+  cohort_to_view = gets.strip
   viewable_cohort = []
   students.map do |student|
     if student[:cohort] == cohort_to_view
