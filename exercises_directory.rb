@@ -7,7 +7,7 @@ def input_students
   #while the name is not empty, repeat this code
   while !name.empty? do
     #  add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name.capitalize, cohort: :november}
     #get another name from the user
     name = gets.chomp
   end
@@ -22,14 +22,19 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  puts "What letter do you want to filter names by?"
+  letter =  gets.chomp
+  students.each do |student|
+    if student[:name].start_with?(letter.upcase)
+      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
+
 
 
 students = input_students
