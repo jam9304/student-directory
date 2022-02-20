@@ -4,14 +4,27 @@ def input_students
   #create an empty array
   students = []
   name = gets.chomp
+  cohort_check = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "N/A", ""]
+  
   #while the name is not empty, repeat this code
   while !name.empty? do
+    puts "And what cohort are they in?"
+    cohort_entry = gets.chomp
+      while !cohort_check.include?(cohort_entry)
+        puts "Please re enter the cohort or state 'N/A'"
+        cohort_entry = gets.chomp
+      end
+      if cohort_entry.empty?
+        cohort = "N/A"
+      else cohort = cohort_entry
+      end
+  
     puts "And what's their favourite Hobby?"
     hobby = gets.chomp
     puts "And finally, what country were they born in?"
     country = gets.chomp
     #  add the student hash to the array
-    students << {name: name, cohort: :november, hobby: hobby, origin_country: country}
+    students << {name: name, cohort: cohort, hobby: hobby, origin_country: country}
     #get another name from the user
     puts "Thank you, now the next student please."
     name = gets.chomp
